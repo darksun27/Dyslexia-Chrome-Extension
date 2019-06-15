@@ -1,0 +1,29 @@
+{
+    "manifest_version" : 2,
+    "name" : "colorChanger",
+    "version" : "1",
+
+    "page_action" : {
+        "default_popup" : "popup.html"
+    },
+
+    "background": {
+        "scripts": ["eventPage.js"],
+        "persistent": false
+      },
+
+    "content_scripts" : [
+        {
+            "matches" : [
+                "<all_urls>"
+            ],
+            "js" : ["content.js", "jquery-3.4.1.min.js"],
+            "css" : ["content.css","font.css"]
+        }
+    ],
+    
+    "permissions" : [
+        "tabs",
+        "notifications"
+    ]
+}

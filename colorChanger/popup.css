@@ -1,0 +1,7 @@
+.minHW{
+    min-width: 240px;
+    min-height: 150px;
+}
+.options{
+    display: flex;
+}

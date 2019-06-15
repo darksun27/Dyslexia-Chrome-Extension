@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>colorChanger</title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="jscolor.js"></script>
+    <script src="popup.js"></script>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="options">
+        <input type="text" id="selectorID" placeholder="Selector">
+        <select id="propertyVal">
+                <option value="color">Font Color</option>
+                <option value="background-color">Background Color</option>
+        </select>
+        <input type="text" id="bgColor" class="jscolor" value="AB2567">
+        <input type="submit" value="Change" id="btnChange">
+    </div>
+    <div>
+        <button id="increase">+</button>
+        Font Size: <span id="size">1</span>em
+        <button id="decrease">-</button>
+    </div>
+</body>
+</html>
