@@ -126,18 +126,23 @@ $(function(){
 
 $('#size_change').click(function(){
     $('body').removeClass('minHW');
-    var n = color.length;
-        window.chrome.storage.sync.get('sizeStatus', (items) => {
-            if (items.sizeStatus) {
-              document.getElementById('sizeStatus').innerText = 'Off'
-            } else {
-              document.getElementById('sizeStatus').innerText = 'On'
-            }
-        window.chrome.storage.sync.set({ 'sizeStaus': !items.sizeStatus })
+    window.chrome.storage.sync.get('sizeStatus', (items) => {
+        if (items.sizeStatus) {
+            document.getElementById('sizeStatus').innerText = 'Off'
+        } else {
+            document.getElementById('sizeStatus').innerText = 'On'
+        }
+        window.chrome.storage.sync.set({ 'sizeStatus': !items.sizeStatus })
+        window.chrome.storage.sync.get('sizeStatus', items => {
+            console.log(items.sizeStatus);
+        })
         window.chrome.storage.sync.set({ 'size': size })
         chrome.tabs.query({active : true, currentWindow : true}, function(tabs){
             chrome.tabs.sendMessage(tabs[0].id, {todo : "changeSize", 'size' : size});
         })
+    })
+    window.chrome.storage.sync.get('sizeStatus', items => {
+        console.log(items.sizeStatus);
     })
 })
     $('#font_switch').click(function(){

@@ -10,7 +10,6 @@ if (!styleDom) {
   styleDom.id = "comic-sans-everything-style";
   styleDom.rel = "stylesheet";
   styleDom.type = "text/css";
-  console.log(styleDom);
 }
 
 const updateStyle = () => {
@@ -33,7 +32,6 @@ let styleDom2 = document.getElementById("changeBackgroundColor");
     styleDom2.id = "changeBackgroundColor";
     styleDom2.rel = "stylesheet";
     styleDom2.type = "text/css";
-    console.log(styleDom);
   }
 
 let styleDom3 = document.getElementById("changeFontSize");
@@ -44,16 +42,12 @@ let styleDom3 = document.getElementById("changeFontSize");
     styleDom3.id = "changeFontSize";
     styleDom3.rel = "stylesheet";
     styleDom3.type = "text/css";
-    console.log(styleDom);
   }  
 
 const updateColor = (color, override) => {
     let changeBackground = `body{background-color : ${color}; border-color : ${color}} *{background-color : ${color}}`
     window.chrome.storage.sync.get(["backgroundStatus"], items => {
       if (!window.chrome.runtime.error) {
-          console.log("in this")
-          console.log(items.backgroundStatus);
-          console.log(color);
         if (items.backgroundStatus || override) {
             styleDom2.innerText = '#'+changeBackground;
         } else {
@@ -68,6 +62,7 @@ const updateSize = (size, override) => {
     window.chrome.storage.sync.get(["sizeStatus"], items => {
       if (!window.chrome.runtime.error) {
         if (items.sizeStatus || override) {
+            console.log(size, override);
             styleDom3.innerText = changeSize;
         } else {
           styleDom3.innerText = "";
@@ -84,7 +79,6 @@ chrome.runtime.onMessage.addListener(function(req, sender, res){
          updateColor(colorFinal);
     }
     else if(req.todo == "changeFont"){
-        console.log(req.property);
         fontOverwrite = `@import url('https://cdn.clarkhacks.com/OpenDyslexic/v1/OpenDyslexic.css'); * {font-family: '${req.property}' !important}`
         updateStyle();
     }
@@ -96,17 +90,20 @@ chrome.runtime.onMessage.addListener(function(req, sender, res){
 let storedColor;
 let backgroundOverride = false;
 let sizeOverride = false;
+let storedSize = 1;
 window.chrome.storage.sync.get(["color"],function(stored){
     storedColor = '#'+stored.color;
-    console.log(storedColor);
     window.chrome.storage.sync.get(["backgroundStatus"],function(items){
         backgroundOverride = items.backgroundStatus;
-        console.log(backgroundOverride);
     })
     window.chrome.storage.sync.get(["sizeStatus"],function(items){
-        sizeOverride = items.size;
+        sizeOverride = items.sizeStatus;
+    })
+    window.chrome.storage.sync.get(["size"],function(items){
+        storedSize = items.size;
+        updateSize(storedSize, !sizeOverride);
     })
     updateStyle();
     updateColor(storedColor, backgroundOverride);
-    //updateSize()
+    
 });
