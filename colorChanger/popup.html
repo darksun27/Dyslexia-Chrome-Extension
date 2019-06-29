@@ -12,21 +12,27 @@
 </head>
 <body>
     <div class="options">
-        <input type="text" id="selectorID" placeholder="Selector">
-        <select id="propertyVal">
-                <option value="color">Font Color</option>
-                <option value="background-color">Background Color</option>
-        </select>
-        <input type="text" id="bgColor" class="jscolor" value="AB2567">
-        <input type="submit" value="Change" id="btnChange">
+        <input type="text" id="bgColor" class="jscolor" value="D9FF1C">
+        <button id="btnChange">Change Background Color <span id="btnStatus"></span></button>
+    </div>
+    <div class="options">
+        <div>
+            <select id="propertyVal1">
+                <option value="OpenDyslexic">Open Dyslexic</option>
+                <option value="OpenDyslexic-Bold">Open Dyslexic Bold</option>
+                <option value="OpenDyslexic-Bolditalic">Open Dyslexic Bold Italic</option>
+                <option value="OpenDyslexic-Italic">Open Dyslexic Italic</option>
+            </select>
+        </div>
+        <div class="container">
+            <button id="font_switch">Turn Font <span id="status"></span></button>
+        </div>
     </div>
     <div>
         <button id="increase">+</button>
         Font Size: <span id="size">1</span>em
         <button id="decrease">-</button>
-        <div class="container">
-            <button id="font_switch">Turn Font <span id="status"></span></button>
-        </div>
+        <button id="size_change">Change Font Size <span id="sizeStatus"></span></button>
     </div>
 </body>
 </html>
